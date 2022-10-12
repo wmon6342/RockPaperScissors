@@ -1,80 +1,81 @@
-
-// making a function that gets a computer to randomly generate either rock, paper or scissors
-function getComputerChoice(){
-    // making variable x equal a random number between 0 and 99
+function computerChoice(){
     let x = Math.floor(Math.random() * 100);
-    // dividing 99 into thirds generated blocks of 33
-    // if x equals a number inside one of each three blocks, it returns a value of rock, paper or scissors corresponding to that block
     if (x <= 33) {
-        return "rock";
-    }
-    else if (x <= 66) {
-        return "paper";
-    }
-    else {
-        return "scissors";
-    }
-
-}
-
-
-let userWin = 0;
-let compWin = 0;
-
-//making a function that lets the user and computer play one round of rock paper scissors against each other
-function playRound(playerSelection, computerSelection){
-    // value playerSelection contains user input argument of either rock, paper or scissors 
-    // user input gets converted to LowerCase();
-    playerSelection = prompt("Enter rock, paper or scissors").toLowerCase();
-    // value computerSelection contains computer input argument
-    computerSelection = getComputerChoice();
-
-    if (playerSelection === computerSelection) {
-        return "Its a draw";
-    }
-    // there are three ways to win against the computer at rock, paper, scissors!
-    else if(playerSelection === "rock" && computerSelection === "scissors") {
-        userWin++;
-        return `You win! ${playerSelection} beats ${computerSelection}`;
-    }
-    else if(playerSelection === "paper" && computerSelection === "rock") {
-        userWin++;
-        return `You win! ${playerSelection} beats ${computerSelection}`;
-    }
-    else if(playerSelection === "scissors" && computerSelection === "paper") {
-        userWin++;
-        return `You win! ${playerSelection} beats ${computerSelection}`;
-
+        return 'rock';
+    } else if (x <= 66) {
+        return 'paper';
     } else {
-        compWin++;
-        return `You lose \:\( ${playerSelection} loses to ${computerSelection}`;
-    }
-
-}
-
-
-// making a function that allows the user to play five games against the computer
-function playGame() {
-    // a for loop iterates through playRound() 5 times before terminating
-    // allowing the user to play 5 times against the computer, and the computer logs the results
-    for(i = 0; i < 5; i++) {
-        console.log(playRound());
-    }
-    // making a function that tallys the win/loss rate of the user, and prints an overall win/loss rate
-    if (userWin > compWin) {
-        console.log('Winna winna');
-    }
-    else {
-        console.log('Oh dear')
+        return 'scissors';
     }
 }
 
+let x = 0;
+let y = 0;
+
+
+const p = document.querySelector('.human');
+const c = document.querySelector('.computer');
+const t = document.querySelector('.tally');
+const w = document.querySelector('.winner');
+
+const rock = document.querySelector('.rock');
+rock.addEventListener('click', () => {
+    t.textContent = `Humans : ${x}, Computers : ${y}`;
+    if(x === 5) {
+        w.textContent = 'humans have won';
+    }  
+    if(y === 5) {
+        w.textContent = 'computers have won';
+    }
+    if(computerChoice() === 'rock') {
+        p.textContent = 'u draw';
+        c.textContent = ':?';
+    } else if (computerChoice() === 'scissors') {
+        p.textContent = 'u win'
+        c.textContent = ':O';
+        x++;
+    } else {
+        p.textContent = 'u lose';
+        c.textContent = ':)'
+        y++;
+    };
+});
+
+const paper = document.querySelector('.paper');
+paper.addEventListener('click', () => {
+    t.textContent = `Humans : ${x}, Computers : ${y}`;
+    if(computerChoice() === 'paper') {
+        p.textContent = 'u draw';
+        c.textContent = ':?';
+    } else if (computerChoice() === 'rock') {
+        p.textContent = 'u win'
+        c.textContent = ':O';
+        x++;
+    } else {
+        p.textContent = 'u lose';
+        c.textContent = ':)'
+        y++;
+    };
+});
+
+const scissors = document.querySelector('.scissors');
+scissors.addEventListener('click', () => {
+    t.textContent = `Humans : ${x}, Computers : ${y}`;
+    if(computerChoice() === 'scissors') {
+        p.textContent = 'u draw';
+        c.textContent = ':?';
+    } else if (computerChoice() === 'paper') {
+        p.textContent = 'u win'
+        c.textContent = ':O';
+        x++;
+    } else {
+        p.textContent = 'u lose';
+        c.textContent = ':)'
+        y++;
+    };
+});
 
 
 
 
-
-// function playGame(){
-
-//}
 
